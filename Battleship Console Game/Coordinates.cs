@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,8 +31,17 @@ namespace Battleship_Console_Game
             }
         }
 
-        public string WhatIsOnCoordinate => LotType.GetAttributeOfType<DescriptionAttribute>().Description;
- 
+        public string WhatIsOnCoordinate => GetEnumDescription(LotType);
 
+        private string GetEnumDescription(LotType lotType)
+        {
+            return lotType
+            .GetType()
+            .GetMember(lotType.ToString())
+            .FirstOrDefault()
+            ?.GetCustomAttribute<DescriptionAttribute>()
+            ?.Description
+            ?? lotType.ToString();
+        }
     }
 }

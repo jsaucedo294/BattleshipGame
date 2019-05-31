@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 
 namespace Battleship_Console_Game
 {
@@ -21,6 +24,7 @@ namespace Battleship_Console_Game
         [Description("S")]
         Submarine
     }
+    
 
     public enum ShotResult
     {
