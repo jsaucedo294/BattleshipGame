@@ -9,11 +9,21 @@ namespace Battleship_Console_Game
     {
         public string Name { get; set; }
         public Map Map { get; set; }
+        public List<Ship> Ships { get; set; }
 
         public Player(string name)
         {
             Name = name;
             Map = new Map();
+            Ships = new List<Ship>
+            {
+                new Battleship(),
+                new Carrier(),
+                new Submarine(),
+                new Cruiser(),
+                new Destroyer()
+            };
+
         }
 
         public void OutputMaps()
