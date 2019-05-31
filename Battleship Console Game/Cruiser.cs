@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Battleship_Console_Game
 {
-    class Program
+    class Cruiser : Ship
     {
-        static void Main(string[] args)
+        public Cruiser()
         {
+            Name = "Cruiser";
+            Size = 3;
+            LotType = LotType.Cruiser;
         }
     }
 }

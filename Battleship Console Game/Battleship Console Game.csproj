@@ -43,8 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Battleship.cs" />
+    <Compile Include="Carrier.cs" />
+    <Compile Include="Coordinates.cs" />
+    <Compile Include="Cruiser.cs" />
+    <Compile Include="Destroyer.cs" />
+    <Compile Include="LotType.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Point.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Radar.cs" />
+    <Compile Include="Ship.cs" />
+    <Compile Include="Submarine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
