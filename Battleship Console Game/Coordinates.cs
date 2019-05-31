@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Battleship_Console_Game
 {
-    class Coordinates
+    public class Coordinates
     {
         public Point Point { get; set; }
         public LotType LotType { get; set; }
@@ -33,7 +33,7 @@ namespace Battleship_Console_Game
 
         public string WhatIsOnCoordinate => GetEnumDescription(LotType);
 
-        private string GetEnumDescription(LotType lotType)
+        public string GetEnumDescription(LotType lotType)
         {
             return lotType
             .GetType()
@@ -42,6 +42,15 @@ namespace Battleship_Console_Game
             ?.GetCustomAttribute<DescriptionAttribute>()
             ?.Description
             ?? lotType.ToString();
+        }
+
+        public bool isAvailable
+        {
+            get
+            {
+                return (Point.X % 2 == 0 && Point.Y % 2 == 0) 
+                    || (Point.X % 2 == 1 && Point.Y % 2 == 1);
+            }
         }
     }
 }

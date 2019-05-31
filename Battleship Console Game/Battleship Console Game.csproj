@@ -48,6 +48,7 @@
     <Compile Include="Coordinates.cs" />
     <Compile Include="Cruiser.cs" />
     <Compile Include="Destroyer.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="LotType.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />

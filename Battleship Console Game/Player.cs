@@ -1,5 +1,4 @@
-﻿using Battleship_Console_Game;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,12 +32,12 @@ namespace Battleship_Console_Game
             {
                 for (int myCol = 0; myCol < 8; myCol++)
                 {
-                    Console.Write(Map.Coordinates.Where(x => x.Point.X == row && x.Point.Y == myCol).First().WhatIsOnCoordinate + " ");
+                    Console.Write(Map.Coordinates.GetAt(row, myCol).WhatIsOnCoordinate + " ");
                 }
                 Console.Write("                 ");
                 for (int radarCol = 0; radarCol < 8; radarCol++)
                 {
-                    Console.Write(Map.Coordinates.Where(x => x.Point.X == row && x.Point.Y == radarCol).First().WhatIsOnCoordinate + " ");
+                    Console.Write(Map.Coordinates.GetAt(row, radarCol).WhatIsOnCoordinate + " ");
                 }
                 Console.Write(Environment.NewLine);
             }
