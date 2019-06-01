@@ -14,7 +14,7 @@ namespace Battleship_Console_Game
         {
             return coordinates.Where(c => c.Point.X == row && c.Point.Y == col).First();
         }
-        public static List<Coordinates> OpenSpaceForShips(this List<Coordinates> coordinates, int startRow, int startCol, int endRow, int endCol)
+        public static List<Coordinates> RangeOfShips(this List<Coordinates> coordinates, int startRow, int startCol, int endRow, int endCol)
         {
             return coordinates.Where(c => c.Point.X >= startRow && c.Point.Y >= startCol && c.Point.X <= endRow && c.Point.Y <= endCol).ToList();
         }

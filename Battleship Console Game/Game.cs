@@ -11,6 +11,8 @@ namespace Battleship_Console_Game
         static void Main(string[] args)
         {
             Player player1 = new Player("Jorge");
+
+            player1.PlaceShipsOnMap();
             player1.OutputMaps();
 
             Console.ReadLine();

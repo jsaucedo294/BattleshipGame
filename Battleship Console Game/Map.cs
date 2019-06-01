@@ -5,7 +5,7 @@ namespace Battleship_Console_Game
 {
     class Map
     {
-       public List<Coordinates> Coordinates { get; set; }
+        public List<Coordinates> Coordinates { get; set; }
 
         public Map()
         {
