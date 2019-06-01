@@ -1,6 +1,4 @@
-﻿using System;
-using static Battleship_Console_Game.Enums;
-
+﻿
 namespace Battleship_Console_Game
 {
     public class Ship

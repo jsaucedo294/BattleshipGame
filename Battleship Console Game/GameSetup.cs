@@ -23,24 +23,23 @@ namespace Battleship_Console_Game
 
         public void RoundShots()
         {
-            if(!Player.HasLost)
-            { 
-                var pointShot = Player.FireOnShips();
-                var resultShot = Enemy.MissOrHitShot(pointShot);
-                Player.ShotResult(pointShot, resultShot);
-            }
+             
+            var pointShot = Player.FireOnShips();
+            var resultShot = Enemy.MissOrHitShot(pointShot);
+            Player.ProcessShotResult(pointShot, resultShot);
+            
 
             if (!Enemy.HasLost)
             {
-                var pointShot2 = Enemy.FireOnShips();
-                var resultShot2 = Player.MissOrHitShot(pointShot2);
-                Enemy.ShotResult(pointShot2, resultShot2);
+                pointShot = Enemy.FireOnShips();
+                resultShot = Player.MissOrHitShot(pointShot);
+                Enemy.ProcessShotResult(pointShot, resultShot);
             }
         }
 
         public void BattleUntilEnd()
         {
-            while (!Player.HasLost || !Enemy.HasLost)
+            while (!Player.HasLost && !Enemy.HasLost)
             {
                 RoundShots();
             }
@@ -52,7 +51,7 @@ namespace Battleship_Console_Game
             {
                 Console.WriteLine(Enemy.Name + " won the battle! Whoooo");
             }
-            else if (Enemy.HasLost)
+            if (Enemy.HasLost)
             {
                 Console.WriteLine(Player.Name + " won the battle! Yaaaay");
             }

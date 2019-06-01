@@ -6,7 +6,7 @@
         {
             Name = "Cruiser";
             Size = 3;
-            LotType = Enums.LotType.Cruiser;
+            LotType = LotType.Cruiser;
         }
     }
 }

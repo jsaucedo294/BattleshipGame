@@ -12,7 +12,7 @@ namespace Battleship_Console_Game
         {
             Name = "Submarine";
             Size = 3;
-            LotType = Enums.LotType.Submarine;
+            LotType = LotType.Submarine;
         }
     }
 }

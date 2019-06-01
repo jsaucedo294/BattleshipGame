@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Battleship_Console_Game.Enums;
 
 namespace Battleship_Console_Game
 {
@@ -156,26 +155,27 @@ namespace Battleship_Console_Game
             if (!coordinate.isOccupiedByShip)
             {
                 Console.WriteLine(Name + " says \"You Miss! Haha!\"");
-                return Enums.ShotResult.Miss;
+                return ShotResult.Miss;
             }
-            else { 
-                var ship = Ships.First(x => x.LotType == coordinate.LotType);
-                ship.Hits++;
-                if (ship.isSink)
-                {
-                    Console.WriteLine(Name + " says \"You Sunk my " + ship.Name +"!");
-                }
-                Console.WriteLine(Name + " says \"Ouch! You shot my ship!");
-                return Enums.ShotResult.Hit;
+            
+            var ship = Ships.First(x => x.LotType == coordinate.LotType);
+            ship.Hits++;
+            Console.WriteLine(Name + " says \"Ouch! You shot my ship!");
+            if (ship.isSink)
+            {
+                Console.WriteLine(Name + " says \"You Sunk my " + ship.Name +"!");
             }
+            
+            return ShotResult.Hit;
+          
         }
 
-        public void ShotResult(Point point, ShotResult shotResult)
+        public void ProcessShotResult(Point point, ShotResult shotResult)
         {
             var coordinate = Radar.Coordinates.GetAt(point.X, point.Y);
-            switch (shotResult)
+            switch(shotResult)
             {
-                case Enums.ShotResult.Hit:
+                case ShotResult.Hit:
                     coordinate.LotType = LotType.Hit;
                     break;
                 default:
