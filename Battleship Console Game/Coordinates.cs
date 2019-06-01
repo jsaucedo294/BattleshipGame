@@ -19,7 +19,7 @@ namespace Battleship_Console_Game
             LotType = LotType.Water;
         }
 
-        public bool isOccupied
+        public bool isOccupiedByShip
         {
             get
             {

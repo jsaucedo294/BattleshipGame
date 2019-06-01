@@ -98,7 +98,7 @@ namespace Battleship_Console_Game
 
                     //If the space is occupied, keep going until you find space
                     var changedCoordinates = Map.Coordinates.RangeOfShips(startRow, startCol, endRow, endCol);
-                    if (changedCoordinates.Any(c => c.isOccupied))
+                    if (changedCoordinates.Any(c => c.isOccupiedByShip))
                     {
                         isOpenSpace = true;
                         continue;
@@ -113,6 +113,39 @@ namespace Battleship_Console_Game
                     isOpenSpace = false;
                 }
             }
+        }
+
+        public Point FireOnShips()
+        {
+            var hitSurroundings = Radar.GetSurroundingHits();
+            Point point;
+
+            if (hitSurroundings.Any())
+            {
+                point = SearchingSurroundingShots();
+            }
+            else
+            {
+                point = FireRandomShot();
+            }
+
+            return point;
+        }
+        private Point FireRandomShot()
+        {
+            var availableCoordinates = Radar.GetOpenCoordinates();
+            Random randomHashCode = new Random(Guid.NewGuid().GetHashCode());
+            var coordinateId = randomHashCode.Next(availableCoordinates.Count);
+            return availableCoordinates[coordinateId];
+        }
+
+        private Point SearchingSurroundingShots()
+        {
+            Random randomHashCode = new Random(Guid.NewGuid().GetHashCode());
+            var hitSurroudings = Radar.GetSurroundingHits();
+            var surroudingId = randomHashCode.Next(hitSurroudings.Count);
+            return hitSurroudings[surroudingId];
+
         }
     }
     
