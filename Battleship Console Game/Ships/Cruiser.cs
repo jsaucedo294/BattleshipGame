@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Battleship_Console_Game
+﻿namespace Battleship_Console_Game
 {
     class Cruiser : Ship
     {
@@ -12,7 +6,7 @@ namespace Battleship_Console_Game
         {
             Name = "Cruiser";
             Size = 3;
-            LotType = LotType.Cruiser;
+            LotType = Enums.LotType.Cruiser;
         }
     }
 }

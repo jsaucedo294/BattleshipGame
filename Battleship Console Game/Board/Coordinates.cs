@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static Battleship_Console_Game.Enums;
 
 namespace Battleship_Console_Game
 {
@@ -44,7 +45,7 @@ namespace Battleship_Console_Game
             ?? lotType.ToString();
         }
 
-        public bool isAvailable
+        public bool IsAvailableForRandomShot
         {
             get
             {

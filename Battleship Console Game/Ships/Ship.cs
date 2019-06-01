@@ -1,8 +1,9 @@
 ﻿using System;
+using static Battleship_Console_Game.Enums;
 
 namespace Battleship_Console_Game
 {
-    class Ship
+    public class Ship
     {
         public string Name { get; set; }
         public int Size { get; set; }

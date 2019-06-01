@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Battleship_Console_Game.Enums;
 
 namespace Battleship_Console_Game
 {
-    class Player
+    public class Player
     {
         public string Name { get; set; }
         public Map Map { get; set; }
         public Radar Radar { get; set; }
         public List<Ship> Ships { get; set; }
-        public bool hasLost
+        public bool HasLost
         {
             get
             {
@@ -36,15 +37,15 @@ namespace Battleship_Console_Game
 
         public void OutputMaps()
         {
-            Console.WriteLine("My Map:                          Radar:");
-            for (int row = 0; row < 8; row++)
+            Console.WriteLine("Map:                          Radar:");
+            for (int row = 1; row <= 8; row++)
             {
-                for (int myCol = 0; myCol < 8; myCol++)
+                for (int myCol = 1; myCol <= 8; myCol++)
                 {
                     Console.Write(Map.Coordinates.GetAt(row, myCol).WhatIsOnCoordinate + " ");
                 }
                 Console.Write("                 ");
-                for (int radarCol = 0; radarCol < 8; radarCol++)
+                for (int radarCol = 1; radarCol <= 8; radarCol++)
                 {
                     Console.Write(Radar.Coordinates.GetAt(row, radarCol).WhatIsOnCoordinate + " ");
                 }
@@ -64,8 +65,8 @@ namespace Battleship_Console_Game
                 while (isOpenSpace)
                 {
                     //Random Numbers from 0 to 8 to decide on what Coordinate will the ship be placed
-                    var startRow = randomPosition.Next(0, 8);
-                    var startCol = randomPosition.Next(0, 8);
+                    var startRow = randomPosition.Next(1, 9);
+                    var startCol = randomPosition.Next(1, 9);
                     int endRow = startRow;
                     int endCol = startCol;
 
@@ -115,6 +116,7 @@ namespace Battleship_Console_Game
             }
         }
 
+      
         public Point FireOnShips()
         {
             var hitSurroundings = Radar.GetSurroundingHits();
@@ -128,17 +130,17 @@ namespace Battleship_Console_Game
             {
                 point = FireRandomShot();
             }
-
+            Console.WriteLine(Name + " says: \"Firing shot at " + point.X.ToString() + ", " + point.Y.ToString() + "\"");
             return point;
         }
         private Point FireRandomShot()
         {
-            var availableCoordinates = Radar.GetOpenCoordinates();
+            var availableCoordinates = Radar.GetOpenCoordinatesSmart();
             Random randomHashCode = new Random(Guid.NewGuid().GetHashCode());
             var coordinateId = randomHashCode.Next(availableCoordinates.Count);
             return availableCoordinates[coordinateId];
+            
         }
-
         private Point SearchingSurroundingShots()
         {
             Random randomHashCode = new Random(Guid.NewGuid().GetHashCode());
@@ -147,6 +149,41 @@ namespace Battleship_Console_Game
             return hitSurroudings[surroudingId];
 
         }
+
+        public ShotResult MissOrHitShot(Point point)
+        {
+            var coordinate = Map.Coordinates.GetAt(point.X, point.Y);
+            if (!coordinate.isOccupiedByShip)
+            {
+                Console.WriteLine(Name + " says \"You Miss! Haha!\"");
+                return Enums.ShotResult.Miss;
+            }
+            else { 
+                var ship = Ships.First(x => x.LotType == coordinate.LotType);
+                ship.Hits++;
+                if (ship.isSink)
+                {
+                    Console.WriteLine(Name + " says \"You Sunk my " + ship.Name +"!");
+                }
+                Console.WriteLine(Name + " says \"Ouch! You shot my ship!");
+                return Enums.ShotResult.Hit;
+            }
+        }
+
+        public void ShotResult(Point point, ShotResult shotResult)
+        {
+            var coordinate = Radar.Coordinates.GetAt(point.X, point.Y);
+            switch (shotResult)
+            {
+                case Enums.ShotResult.Hit:
+                    coordinate.LotType = LotType.Hit;
+                    break;
+                default:
+                    coordinate.LotType = LotType.Miss;
+                    break;
+            }
+        }
+
     }
     
 }
