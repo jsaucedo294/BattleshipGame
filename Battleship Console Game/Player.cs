@@ -121,16 +121,18 @@ namespace Battleship_Console_Game
 
         public Point ManaulFireOnShips()
         {
+            string xInput;
+            string yInput;
             int xPoint;
             int yPoint;
             do {
                 Console.Write("Pick a number between 1 and 8 for the Row: ");
-                var xInput = Console.ReadLine();
+                xInput = Console.ReadLine();
                 int.TryParse(xInput, out xPoint);
                 Console.Write("Pick a number between 1 and 8 for the Column: ");
-                var yInput = Console.ReadLine();
+                yInput = Console.ReadLine();
                 int.TryParse(yInput, out yPoint);
-            } while (xPoint < 0 || xPoint > 8 || yPoint < 0 || yPoint > 8);
+            } while (xPoint < 0 || xPoint > 8 || yPoint < 0 || yPoint > 8 || string.IsNullOrEmpty(xInput) || string.IsNullOrEmpty(yInput) || !(int.TryParse(xInput, out xPoint)) || !(int.TryParse(yInput, out yPoint)));
 
 
             Point point = new Point(xPoint, yPoint);
