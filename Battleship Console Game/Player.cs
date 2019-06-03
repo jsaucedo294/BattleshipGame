@@ -36,20 +36,24 @@ namespace Battleship_Console_Game
 
         public void OutputMaps()
         {
-            Console.WriteLine("Map:                          Radar:");
+            Console.WriteLine("Map:                               Radar:");
+            Console.Write(Environment.NewLine);
             for (int row = 1; row <= 8; row++)
             {
+                Console.Write(row + " ");
                 for (int myCol = 1; myCol <= 8; myCol++)
                 {
                     Console.Write(Map.Coordinates.GetAt(row, myCol).WhatIsOnCoordinate + " ");
                 }
                 Console.Write("                 ");
+                Console.Write(row + " ");
                 for (int radarCol = 1; radarCol <= 8; radarCol++)
                 {
                     Console.Write(Radar.Coordinates.GetAt(row, radarCol).WhatIsOnCoordinate + " ");
                 }
                 Console.Write(Environment.NewLine);
             }
+            Console.WriteLine("  1 2 3 4 5 6 7 8                    1 2 3 4 5 6 7 8");
             Console.Write(Environment.NewLine);
         }
 
@@ -115,8 +119,26 @@ namespace Battleship_Console_Game
             }
         }
 
-      
-        public Point FireOnShips()
+        public Point ManaulFireOnShips()
+        {
+            int xPoint;
+            int yPoint;
+            do {
+                Console.Write("Pick a number between 1 and 8 for the Row: ");
+                var xInput = Console.ReadLine();
+                int.TryParse(xInput, out xPoint);
+                Console.Write("Pick a number between 1 and 8 for the Column: ");
+                var yInput = Console.ReadLine();
+                int.TryParse(yInput, out yPoint);
+            } while (xPoint < 0 || xPoint > 8 || yPoint < 0 || yPoint > 8);
+
+
+            Point point = new Point(xPoint, yPoint);
+            return point;
+
+        }
+
+        public Point AutoFireOnShips()
         {
             var hitSurroundings = Radar.GetSurroundingHits();
             Point point;
@@ -127,12 +149,12 @@ namespace Battleship_Console_Game
             }
             else
             {
-                point = FireRandomShot();
+                point = AutoFireRandomShot();
             }
             Console.WriteLine(Name + " says: \"Firing shot at " + point.X.ToString() + ", " + point.Y.ToString() + "\"");
             return point;
         }
-        private Point FireRandomShot()
+        private Point AutoFireRandomShot()
         {
             var availableCoordinates = Radar.GetOpenCoordinatesSmart();
             Random randomHashCode = new Random(Guid.NewGuid().GetHashCode());

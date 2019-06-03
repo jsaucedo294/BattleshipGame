@@ -18,23 +18,23 @@ namespace Battleship_Console_Game
             Player.PlaceShipsOnMap();
             Enemy.PlaceShipsOnMap();
             Player.OutputMaps();
-            Enemy.OutputMaps();
         }
 
         public void RoundShots()
         {
              
-            var pointShot = Player.FireOnShips();
+            var pointShot = Player.ManaulFireOnShips();
             var resultShot = Enemy.MissOrHitShot(pointShot);
             Player.ProcessShotResult(pointShot, resultShot);
             
 
             if (!Enemy.HasLost)
             {
-                pointShot = Enemy.FireOnShips();
+                pointShot = Enemy.AutoFireOnShips();
                 resultShot = Player.MissOrHitShot(pointShot);
                 Enemy.ProcessShotResult(pointShot, resultShot);
             }
+            Player.OutputMaps();
         }
 
         public void BattleUntilEnd()
