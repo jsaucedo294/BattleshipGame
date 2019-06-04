@@ -194,18 +194,24 @@ namespace Battleship_Console_Game
           
         }
 
-        public void ProcessShotResult(Point point, ShotResult shotResult)
+        public void ProcessShotResult(Player enemy, Point point, ShotResult shotResult)
         {
-            var coordinate = Radar.Coordinates.GetAt(point.X, point.Y);
-            switch(shotResult)
+            var coordinateRadar = Radar.Coordinates.GetAt(point.X, point.Y);
+            var coordinateMap = enemy.Map.Coordinates.GetAt(point.X, point.Y);
+
+            switch (shotResult)
             {
                 case ShotResult.Hit:
-                    coordinate.LotType = LotType.Hit;
+                    coordinateRadar.LotType = LotType.Hit;
+                    coordinateMap.LotType = LotType.Hit;
                     break;
                 default:
-                    coordinate.LotType = LotType.Miss;
+                    coordinateRadar.LotType = LotType.Miss;
+                    coordinateMap.LotType = LotType.Miss;
                     break;
             }
+            
+    
         }
 
     }
