@@ -7,29 +7,29 @@ namespace Battleship_Console_Game
     public class Coordinates
     {
         public Point Point { get; set; }
-        public LotType LotType { get; set; }
+        public CoordinateType CoordinateType { get; set; }
 
         public Coordinates(int x, int y)
         {
             Point = new Point(x, y);
-            LotType = LotType.Water;
+            CoordinateType = CoordinateType.Water;
         }
 
         public bool isOccupiedByShip
         {
             get
             {
-                return LotType == LotType.Battleship
-                    || LotType == LotType.Carrier
-                    || LotType == LotType.Cruiser
-                    || LotType == LotType.Submarine
-                    || LotType == LotType.Destroyer;
+                return CoordinateType == CoordinateType.Battleship
+                    || CoordinateType == CoordinateType.Carrier
+                    || CoordinateType == CoordinateType.Cruiser
+                    || CoordinateType == CoordinateType.Submarine
+                    || CoordinateType == CoordinateType.Destroyer;
             }
         }
 
-        public string WhatIsOnCoordinate => GetEnumDescription(LotType);
+        public string WhatIsOnCoordinate => GetEnumDescription(CoordinateType);
 
-        public string GetEnumDescription(LotType lotType)
+        public string GetEnumDescription(CoordinateType lotType)
         {
             return lotType
             .GetType()

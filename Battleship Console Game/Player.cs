@@ -111,7 +111,7 @@ namespace Battleship_Console_Game
                     //Place ships adding the key letter for the ships
                     foreach (var coordinate in changedCoordinates)
                     {
-                        coordinate.LotType = ship.LotType;
+                        coordinate.CoordinateType = ship.CoordinateType;
                     }
                     //Stop the while statement
                     isOpenSpace = false;
@@ -119,7 +119,7 @@ namespace Battleship_Console_Game
             }
         }
 
-        public Point ManaulFireOnShips()
+        public Point ManualFireOnShips()
         {
             string xInput;
             string yInput;
@@ -182,7 +182,7 @@ namespace Battleship_Console_Game
                 return ShotResult.Miss;
             }
             
-            var ship = Ships.First(x => x.LotType == coordinate.LotType);
+            var ship = Ships.First(x => x.CoordinateType == coordinate.CoordinateType);
             ship.Hits++;
             Console.WriteLine(Name + " says \"Ouch! You shot my ship!");
             if (ship.isSink)
@@ -202,12 +202,12 @@ namespace Battleship_Console_Game
             switch (shotResult)
             {
                 case ShotResult.Hit:
-                    coordinateRadar.LotType = LotType.Hit;
-                    coordinateMap.LotType = LotType.Hit;
+                    coordinateRadar.CoordinateType = CoordinateType.Hit;
+                    coordinateMap.CoordinateType = CoordinateType.Hit;
                     break;
                 default:
-                    coordinateRadar.LotType = LotType.Miss;
-                    coordinateMap.LotType = LotType.Miss;
+                    coordinateRadar.CoordinateType = CoordinateType.Miss;
+                    coordinateMap.CoordinateType = CoordinateType.Miss;
                     break;
             }
             

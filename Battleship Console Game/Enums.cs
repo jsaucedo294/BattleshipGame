@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Battleship_Console_Game
 {
-    public enum LotType { 
+    public enum CoordinateType { 
         [Description("~")]
         Water,
         [Description("X")]

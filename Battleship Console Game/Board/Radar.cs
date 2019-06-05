@@ -9,11 +9,11 @@ namespace Battleship_Console_Game
        
         public List<Point> GetOpenCoordinatesSmart()
         {
-            return Coordinates.Where(x => x.LotType == LotType.Water && x.IsAvailableForRandomShot).Select(x => x.Point).ToList();
+            return Coordinates.Where(x => x.CoordinateType == CoordinateType.Water && x.IsAvailableForRandomShot).Select(x => x.Point).ToList();
         }
         public List<Point> GetOpenCoordinatesLeft()
         {
-            return Coordinates.Where(x => x.LotType == LotType.Water).Select(x => x.Point).ToList();
+            return Coordinates.Where(x => x.CoordinateType == CoordinateType.Water).Select(x => x.Point).ToList();
         }
 
 
@@ -48,13 +48,13 @@ namespace Battleship_Console_Game
         public List<Point> GetSurroundingHits()
         {
             List<Coordinates> coordinates = new List<Coordinates>();
-            var hits = Coordinates.Where(c => c.LotType == LotType.Hit);
+            var hits = Coordinates.Where(c => c.CoordinateType == CoordinateType.Hit);
 
             foreach (var hit in hits)
             {
                 coordinates.AddRange(GetSurroundingCoordinates(hit.Point).ToList());
             }
-            return coordinates.Distinct().Where(x => x.LotType == LotType.Water).Select(x => x.Point).ToList();
+            return coordinates.Distinct().Where(x => x.CoordinateType == CoordinateType.Water).Select(x => x.Point).ToList();
         }
     }
 }

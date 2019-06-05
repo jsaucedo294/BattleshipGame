@@ -6,7 +6,7 @@
         {
             Name = "Cruiser";
             Size = 3;
-            LotType = LotType.Cruiser;
+            CoordinateType = CoordinateType.Cruiser;
         }
     }
 }

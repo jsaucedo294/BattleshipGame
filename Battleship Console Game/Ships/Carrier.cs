@@ -7,7 +7,7 @@ namespace Battleship_Console_Game
         {
             Name = "Carrier";
             Size = 5;
-            LotType = LotType.Carrier;
+            CoordinateType = CoordinateType.Carrier;
         }
     }
 }
