@@ -36,8 +36,8 @@ namespace Battleship_Console_Game
 
         public void OutputMaps()
         {
-            Console.WriteLine("Map:                               Radar:");
             Console.Write(Environment.NewLine);
+            Console.WriteLine("Map:                               Radar:");
             for (int row = 1; row <= 8; row++)
             {
                 Console.Write(row + " ");
@@ -184,6 +184,7 @@ namespace Battleship_Console_Game
             
             var ship = Ships.First(x => x.CoordinateType == coordinate.CoordinateType);
             ship.Hits++;
+            
             Console.WriteLine(Name + " says \"Ouch! You shot my ship!");
             if (ship.isSink)
             {

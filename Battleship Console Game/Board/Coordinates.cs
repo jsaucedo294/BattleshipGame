@@ -29,15 +29,15 @@ namespace Battleship_Console_Game
 
         public string WhatIsOnCoordinate => GetEnumDescription(CoordinateType);
 
-        public string GetEnumDescription(CoordinateType lotType)
+        public string GetEnumDescription(CoordinateType coordinateType)
         {
-            return lotType
+            return coordinateType
             .GetType()
-            .GetMember(lotType.ToString())
+            .GetMember(coordinateType.ToString())
             .FirstOrDefault()
             ?.GetCustomAttribute<DescriptionAttribute>()
             ?.Description
-            ?? lotType.ToString();
+            ?? coordinateType.ToString();
         }
 
         public bool IsAvailableForRandomShot

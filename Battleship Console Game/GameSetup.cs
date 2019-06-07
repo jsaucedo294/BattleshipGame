@@ -23,7 +23,7 @@ namespace Battleship_Console_Game
         public void RoundShots()
         {
              
-            var pointShot = Player.AutoFireOnShips();
+            var pointShot = Player.ManualFireOnShips();
              var resultShot = Enemy.MissOrHitShot(pointShot);
             Player.ProcessShotResult(Enemy, pointShot, resultShot);
             
