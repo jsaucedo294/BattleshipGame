@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Battleship_Console_Game
 {
-    class GameSetup
+    public class GameSetup
     {
         public Player Player { get; set; }
         public Player Enemy { get; set; }
+        public List<Score> Scores { get; set; }
 
         public GameSetup()
         {
             Player = new Player("Jorge");
             Enemy = new Player("Pirate");
+            Scores = FileReaderAndWriter.GetScores();
             Player.PlaceShipsOnMap();
             Enemy.PlaceShipsOnMap();
             Player.OutputMaps();
@@ -23,7 +25,7 @@ namespace Battleship_Console_Game
         public void RoundShots()
         {
              
-            var pointShot = Player.ManualFireOnShips();
+            var pointShot = Player.AutoFireOnShips();
              var resultShot = Enemy.MissOrHitShot(pointShot);
             Player.ProcessShotResult(Enemy, pointShot, resultShot);
             
@@ -56,6 +58,7 @@ namespace Battleship_Console_Game
             {
                 Console.WriteLine(Player.Name + " won the battle! Yaaaay");
             }
+            
         }
             
     }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Battleship_Console_Game
 {
@@ -19,33 +16,38 @@ namespace Battleship_Console_Game
             Console.WriteLine("                                         |_|    ");
             Console.Write(Environment.NewLine);
             bool keepPlaying = true;
-            int gameNum = 0;
-            int shipsDestroyed = 0;
+            
             while (keepPlaying == true)
             {
                 Console.WriteLine("Press Options:\n1:Play Game\n2:Show Score\n3:Quit Game");
                 var options = Console.ReadLine();
                 if (options == "1")
                 {
-                    GameSetup game1 = new GameSetup();
-                    game1.BattleUntilEnd();
-                    if (game1.Enemy.HasLost)
+                    
+                    GameSetup battle = new GameSetup();
+                    var scores = battle.Scores;
+                    foreach (var score in scores)
                     {
-                        gameNum++;
+                        
+                        battle.BattleUntilEnd();
+
+                        if (battle.Enemy.HasLost)
+                        {
+                            score.GamesWon++;
+                            score.TotalPlayed++;
+                        }
+                        else
+                        {
+                            score.TotalPlayed++;
+                        }
+                        score.ShipsSunk += battle.Enemy.Ships.Where(s => s.isSink).Count();
+                        FileReaderAndWriter.SetScores(battle, score);
                     }
-                    shipsDestroyed += game1.Enemy.Ships.Where(s => s.isSink).Count();
-
-
+                 
                 }
                 else if (options == "2")
                 {
-                    Console.Write(Environment.NewLine);
-                    Console.WriteLine("╔═╗┌─┐┌─┐┬─┐┌─┐");
-                    Console.WriteLine("╚═╗│  │ │├┬┘├┤ ");
-                    Console.WriteLine("╚═╝└─┘└─┘┴└─└─┘");
-                    Console.WriteLine($"Games Won: {gameNum}");
-                    Console.WriteLine($"Ships Sunk: {shipsDestroyed}");
-                    Console.Write(Environment.NewLine);
+                    FileReaderAndWriter.DisplayScore();
                 }
                 else if (options == "3")
                 {

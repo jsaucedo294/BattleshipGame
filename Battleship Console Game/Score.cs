@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Newtonsoft.Json;
 
 namespace Battleship_Console_Game
 {
-    class Score
+
+    public class RootObject
     {
-        public static void ReadAndWriteScore()
-        {
-            string currentDirectory = Directory.GetCurrentDirectory();
-            DirectoryInfo directoryInfo = new DirectoryInfo(currentDirectory);
-            var fileName = Path.Combine(directoryInfo.FullName, "Score.csv");
-            var file = new FileInfo(fileName);
-            if (file.Exists)
-            {
-                Console.WriteLine("File exists");
-            }
-            else
-            {
-                Console.WriteLine("File does not exist");
-            }
-            
-        }
+        public Score[] Score { get; set; }
     }
+
+    public class Score
+    {
+        [JsonProperty(PropertyName = "player_name")]
+        public string PlayerName { get; set; }
+        [JsonProperty(PropertyName = "games_won")]
+        public int GamesWon { get; set; }
+        [JsonProperty(PropertyName = "total_played")]
+        public int TotalPlayed { get; set; }
+        [JsonProperty(PropertyName = "average_won")]
+        public int AverageWon { get; set; }
+        [JsonProperty(PropertyName = "ships_sunk")]
+        public int ShipsSunk { get; set; }
+    }
+
+
 }
