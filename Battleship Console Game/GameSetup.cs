@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Battleship_Console_Game
 {
@@ -26,7 +23,7 @@ namespace Battleship_Console_Game
         {
              
             var pointShot = Player.AutoFireOnShips();
-             var resultShot = Enemy.MissOrHitShot(pointShot);
+            var resultShot = Enemy.MissOrHitShot(pointShot);
             Player.ProcessShotResult(Enemy, pointShot, resultShot);
             
 
@@ -46,8 +43,10 @@ namespace Battleship_Console_Game
             {
                 RoundShots();
             }
-
+            Console.WriteLine(Player.Name + "'s Board");
             Player.OutputMaps();
+
+            Console.WriteLine(Enemy.Name + "'s Board");
             Enemy.OutputMaps();
 
             if (Player.HasLost)

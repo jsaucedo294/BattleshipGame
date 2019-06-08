@@ -43,13 +43,53 @@ namespace Battleship_Console_Game
                 Console.Write(row + " ");
                 for (int myCol = 1; myCol <= 8; myCol++)
                 {
-                    Console.Write(Map.Coordinates.GetAt(row, myCol).WhatIsOnCoordinate + " ");
+                    switch (Map.Coordinates.GetAt(row, myCol).WhatIsOnCoordinate)
+                    {
+                        case "X":
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(Map.Coordinates.GetAt(row, myCol).WhatIsOnCoordinate + " ");
+                            Console.ResetColor();
+                            break;
+                        case "M":
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write(Map.Coordinates.GetAt(row, myCol).WhatIsOnCoordinate + " ");
+                            Console.ResetColor();
+                            break;
+                        case "~":
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write(Map.Coordinates.GetAt(row, myCol).WhatIsOnCoordinate + " ");
+                            Console.ResetColor();
+                            break;
+                        default:
+                            Console.Write(Map.Coordinates.GetAt(row, myCol).WhatIsOnCoordinate + " ");
+                            break;
+                    }
                 }
                 Console.Write("                 ");
                 Console.Write(row + " ");
                 for (int radarCol = 1; radarCol <= 8; radarCol++)
                 {
-                    Console.Write(Radar.Coordinates.GetAt(row, radarCol).WhatIsOnCoordinate + " ");
+                    switch (Radar.Coordinates.GetAt(row, radarCol).WhatIsOnCoordinate)
+                    {
+                        case "X":
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(Radar.Coordinates.GetAt(row, radarCol).WhatIsOnCoordinate + " ");
+                            Console.ResetColor();
+                            break;
+                        case "M":
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write(Radar.Coordinates.GetAt(row, radarCol).WhatIsOnCoordinate + " ");
+                            Console.ResetColor();
+                            break;
+                        case "~":
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write(Radar.Coordinates.GetAt(row, radarCol).WhatIsOnCoordinate + " ");
+                            Console.ResetColor();
+                            break;
+                        default:
+                            Console.Write(Radar.Coordinates.GetAt(row, radarCol).WhatIsOnCoordinate + " ");
+                            break;
+                    }
                 }
                 Console.Write(Environment.NewLine);
             }
