@@ -17,32 +17,51 @@ namespace Battleship_Console_Game
             Console.Write(Environment.NewLine);
             bool keepPlaying = true;
             
+            //Choose Option to keep playing, showing score, or quiting the game.
             while (keepPlaying == true)
             {
                 Console.WriteLine("Press Options:\n1:Play Game\n2:Show Score\n3:Quit Game");
                 var options = Console.ReadLine();
                 if (options == "1")
                 {
-                    
-                    GameSetup battle = new GameSetup();
-                    var scores = battle.Scores;
-                    foreach (var score in scores)
-                    {
-                        
-                        battle.BattleUntilEnd();
+                    Console.WriteLine("What is your Name?");
+                    var name = Console.ReadLine();
 
-                        if (battle.Enemy.HasLost)
+                    GameSetup battle = new GameSetup(name);
+                    var score = new Score();
+
+                    //Pick option to play AUTO or MANUAL
+                    bool pickingOption = true;
+                    int option = 0;
+                    while (pickingOption)
+                    {
+                        Console.WriteLine("Do you want to play AUTO or MANUAL?\n1: AUTO\n2: MANUAL");
+                        int.TryParse(Console.ReadLine(), out option);
+                        if (option == 1 || option == 2)
                         {
-                            score.GamesWon++;
-                            score.TotalPlayed++;
+                            pickingOption = false;
                         }
-                        else
-                        {
-                            score.TotalPlayed++;
-                        }
-                        score.ShipsSunk += battle.Enemy.Ships.Where(s => s.isSink).Count();
-                        FileReaderAndWriter.SetScores(battle, score);
+
                     }
+                    //Battle starts
+                    battle.BattleUntilEnd(option);
+
+                    //Check if person played before to update his/her scores
+                    
+                    if (battle.Enemy.HasLost)
+                    {
+                        score.GamesWon++;
+                    }
+                    else
+                    {
+                        score.GamesLost++;
+                    }
+                  
+                    score.ShipsSunk += battle.Enemy.Ships.Where(s => s.isSink).Count();
+
+                    FileReaderAndWriter.SetScores(battle, score);
+                     
+                  
                  
                 }
                 else if (options == "2")

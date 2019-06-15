@@ -6,6 +6,7 @@ namespace Battleship_Console_Game
 {
     public class Player
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public Map Map { get; set; }
         public Radar Radar { get; set; }

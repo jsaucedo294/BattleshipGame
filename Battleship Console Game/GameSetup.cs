@@ -9,9 +9,9 @@ namespace Battleship_Console_Game
         public Player Enemy { get; set; }
         public List<Score> Scores { get; set; }
 
-        public GameSetup()
+        public GameSetup(string name)
         {
-            Player = new Player("Jorge");
+            Player = new Player(name);
             Enemy = new Player("Pirate");
             Scores = FileReaderAndWriter.GetScores();
             Player.PlaceShipsOnMap();
@@ -19,10 +19,20 @@ namespace Battleship_Console_Game
             Player.OutputMaps();
         }
 
-        public void RoundShots()
+        //Round of shots
+        public void RoundShots(int option)
         {
-             
-            var pointShot = Player.AutoFireOnShips();
+            Point pointShot = null;
+            if (option == 1)
+            {
+                //Player plays autoplay
+                pointShot = Player.AutoFireOnShips();
+            }
+            else if (option == 2)
+            {
+                //Player plays manual
+                pointShot = Player.ManualFireOnShips();
+            }
             var resultShot = Enemy.MissOrHitShot(pointShot);
             Player.ProcessShotResult(Enemy, pointShot, resultShot);
             
@@ -36,13 +46,24 @@ namespace Battleship_Console_Game
             // Print map and radar after RoundShots
             Player.OutputMaps();
         }
-
-        public void BattleUntilEnd()
+        //Play until Player or Enemy looses
+        public void BattleUntilEnd(int option)
         {
-            while (!Player.HasLost && !Enemy.HasLost)
+            if (option == 1)
             {
-                RoundShots();
+                while (!Player.HasLost && !Enemy.HasLost)
+                {
+                    RoundShots(option);
+                }
             }
+            else if (option == 2)
+            {
+                while (!Player.HasLost && !Enemy.HasLost)
+                {
+                    RoundShots(option);
+                }
+            }
+            //Print Player and Enemy Board and Radar
             Console.WriteLine(Player.Name + "'s Board");
             Player.OutputMaps();
 

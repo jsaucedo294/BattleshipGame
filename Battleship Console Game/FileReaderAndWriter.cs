@@ -22,7 +22,36 @@ namespace Battleship_Console_Game
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directoryInfo = new DirectoryInfo(currentDirectory);
             var fileName = Path.Combine(directoryInfo.FullName, "battleshipScore.json");
-            var scores = battle.Scores;
+            var scores = GetScores();
+            bool isNewPlayer = true;
+            foreach (var oldScore in scores)
+            {
+                //if old player, then add new score
+                if (battle.Player.Name.ToLower() == oldScore.PlayerName.ToLower())
+                {
+                    oldScore.GamesWon += score.GamesWon;
+                    oldScore.GamesLost += score.GamesLost;
+                    oldScore.ShipsSunk += score.ShipsSunk;
+                    isNewPlayer = false; 
+                }
+            }
+            //if New player, then serialize new score
+            if (isNewPlayer)
+            {
+                score.PlayerName = battle.Player.Name;
+                scores.Add(score);
+            }
+           
+            SerializeScoreToFile(scores, fileName);
+        }
+        public static void SetNewScores(GameSetup battle, Score score)
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo directoryInfo = new DirectoryInfo(currentDirectory);
+            var fileName = Path.Combine(directoryInfo.FullName, "battleshipScore.json");
+
+            List<Score> scores = GetScores();
+            scores.Add(score);
 
             SerializeScoreToFile(scores, fileName);
         }
@@ -40,6 +69,7 @@ namespace Battleship_Console_Game
             { 
                 Console.WriteLine($"Player Name: {score.PlayerName}");
                 Console.WriteLine($"Games Won: {score.GamesWon}");
+                Console.WriteLine($"Games Lost: {score.GamesLost}");
                 if (score.TotalPlayed == 0)
                 {
                     Console.WriteLine($"Winning Percentage: 0%");
