@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Battleship_Console_Game
 {
@@ -56,6 +57,7 @@ namespace Battleship_Console_Game
             SerializeScoreToFile(scores, fileName);
         }
 
+
         public static void DisplayScore()
         {
             var scores = GetScores();
@@ -65,7 +67,10 @@ namespace Battleship_Console_Game
             Console.WriteLine("╚═╗│  │ │├┬┘├┤ ");
             Console.WriteLine("╚═╝└─┘└─┘┴└─└─┘");
             Console.ResetColor();
-            foreach (var score in scores)
+            //Sort List by GamesWon
+            var sortedScores = scores.OrderByDescending(s => s.GamesWon).ToList();
+
+            foreach (var score in sortedScores)
             { 
                 Console.WriteLine($"Player Name: {score.PlayerName}");
                 Console.WriteLine($"Games Won: {score.GamesWon}");
