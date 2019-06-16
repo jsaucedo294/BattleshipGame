@@ -70,6 +70,7 @@ namespace Battleship_Console_Game
             //Sort List by GamesWon
             var sortedScores = scores.OrderByDescending(s => s.GamesWon).ToList();
 
+            //Print Scores
             foreach (var score in sortedScores)
             { 
                 Console.WriteLine($"Player Name: {score.PlayerName}");
@@ -88,7 +89,7 @@ namespace Battleship_Console_Game
             }
         }
         
-
+        //Read Scores on file
         public static List<Score> DeserializeScores(string fileName)
         {
             var scores = new List<Score>();
@@ -102,6 +103,7 @@ namespace Battleship_Console_Game
             return scores;
         }
         
+        //Writes Scores on file
         public static void SerializeScoreToFile(List<Score> scores, string fileName)
         {
             var serializer = new JsonSerializer();
