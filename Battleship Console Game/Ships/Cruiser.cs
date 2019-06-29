@@ -1,4 +1,4 @@
-﻿namespace Battleship_Console_Game
+﻿namespace BattleshipConsoleGame
 {
     class Cruiser : Ship
     {

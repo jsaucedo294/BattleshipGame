@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Battleship_Console_Game
+namespace BattleshipConsoleGame
 {
     public enum CoordinateType { 
         [Description("~")]

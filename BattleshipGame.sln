@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleship Console Game", "Battleship Console Game\Battleship Console Game.csproj", "{32E11A77-17FA-418E-8F75-3E9F22414D3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleshipConsoleGame", "Battleship Console Game\BattleshipConsoleGame.csproj", "{32E11A77-17FA-418E-8F75-3E9F22414D3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

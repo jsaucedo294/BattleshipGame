@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Battleship_Console_Game
+namespace BattleshipConsoleGame
 {
     public class GameSetup
     {
@@ -13,7 +14,7 @@ namespace Battleship_Console_Game
         {
             Player = new Player(name);
             Enemy = new Player("Pirate");
-            Scores = FileReaderAndWriter.GetScores();
+            Scores = FileReaderAndWriter.ReadScores();
             Player.PlaceShipsOnMap();
             Enemy.PlaceShipsOnMap();
             Player.OutputMaps();
@@ -78,8 +79,41 @@ namespace Battleship_Console_Game
             {
                 Console.WriteLine(Player.Name + " won the battle! Yaaaay");
             }
-            
+        
+    
         }
-            
+
+        //Gets Enemy's total ships sunk per game
+        public int GetShipsSunk()
+        {
+            return Enemy.Ships.Where(s => s.isSink).Count();
+        }
+
+        public void UpdateScore(Score score)
+        {
+            if (Enemy.HasLost)
+            {
+                score.GamesWon++;
+            }
+            else
+            {
+                score.GamesLost++;
+            }
+            score.ShipsSunk += GetShipsSunk();
+
+            var previousPlayer = Scores.Find(s => s.PlayerName.ToLower() == Player.Name.ToLower());
+            if (previousPlayer != null)
+            {
+                previousPlayer.GamesWon += score.GamesWon;
+                previousPlayer.GamesLost += score.GamesLost;
+                previousPlayer.ShipsSunk += score.ShipsSunk;
+            }
+            else
+            {
+                //if New player, then serialize new score
+                score.PlayerName = Player.Name;
+                Scores.Add(score);
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 using Newtonsoft.Json;
 
-namespace Battleship_Console_Game
+namespace BattleshipConsoleGame
 {
 
     public class RootObject

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Linq;
 
-namespace Battleship_Console_Game
+namespace BattleshipConsoleGame
 {
     class Game
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.WriteLine("  ____        _   _   _           _     _       ");
             Console.WriteLine(" | __ )  __ _| |_| |_| | ___  ___| |__ (_)_ __  ");
             Console.WriteLine(" |  _ \\ / _` | __| __| |/ _ \\/ __| '_ \\| | '_ \\ ");
@@ -39,27 +38,19 @@ namespace Battleship_Console_Game
                         int.TryParse(Console.ReadLine(), out option);
                         if (option == 1 || option == 2)
                         {
+                            //Exit While loop
                             pickingOption = false;
                         }
 
                     }
                     //Battle starts
                     battle.BattleUntilEnd(option);
-
-                    //Check if person played before to update his/her scores
                     
-                    if (battle.Enemy.HasLost)
-                    {
-                        score.GamesWon++;
-                    }
-                    else
-                    {
-                        score.GamesLost++;
-                    }
-                  
-                    score.ShipsSunk += battle.Enemy.Ships.Where(s => s.isSink).Count();
+                    //Update new score
+                    battle.UpdateScore(score);
 
-                    FileReaderAndWriter.SetScores(battle, score);
+                    //Write updated score
+                    FileReaderAndWriter.WriteScoreToFile(battle);
                      
                   
                  

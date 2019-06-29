@@ -1,5 +1,5 @@
 ﻿
-namespace Battleship_Console_Game
+namespace BattleshipConsoleGame
 {
     class Battleship : Ship
     {

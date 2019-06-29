@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Battleship_Console_Game
+namespace BattleshipConsoleGame
 {
     public static class Extensions
     {

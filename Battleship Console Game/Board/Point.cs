@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Battleship_Console_Game
+namespace BattleshipConsoleGame
 {
     public class Point
     {

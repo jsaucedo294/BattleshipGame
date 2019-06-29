@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Battleship_Console_Game
+namespace BattleshipConsoleGame
 {
     public class Radar : Map
     {

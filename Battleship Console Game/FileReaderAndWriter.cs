@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Battleship_Console_Game
+namespace BattleshipConsoleGame
 {
     public static class FileReaderAndWriter
     {
-        public static List<Score> GetScores()
+        public static List<Score> ReadScores()
         {
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directoryInfo = new DirectoryInfo(currentDirectory);
@@ -18,49 +18,19 @@ namespace Battleship_Console_Game
             return scores; 
         }
 
-        public static void SetScores(GameSetup battle, Score score)
+        public static void WriteScoreToFile(GameSetup battle)
         {
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directoryInfo = new DirectoryInfo(currentDirectory);
             var fileName = Path.Combine(directoryInfo.FullName, "battleshipScore.json");
-            var scores = GetScores();
-            bool isNewPlayer = true;
-            foreach (var oldScore in scores)
-            {
-                //if old player, then add new score
-                if (battle.Player.Name.ToLower() == oldScore.PlayerName.ToLower())
-                {
-                    oldScore.GamesWon += score.GamesWon;
-                    oldScore.GamesLost += score.GamesLost;
-                    oldScore.ShipsSunk += score.ShipsSunk;
-                    isNewPlayer = false; 
-                }
-            }
-            //if New player, then serialize new score
-            if (isNewPlayer)
-            {
-                score.PlayerName = battle.Player.Name;
-                scores.Add(score);
-            }
-           
-            SerializeScoreToFile(scores, fileName);
+            
+            SerializeScoreToFile(battle.Scores, fileName);
         }
-        public static void SetNewScores(GameSetup battle, Score score)
-        {
-            string currentDirectory = Directory.GetCurrentDirectory();
-            DirectoryInfo directoryInfo = new DirectoryInfo(currentDirectory);
-            var fileName = Path.Combine(directoryInfo.FullName, "battleshipScore.json");
-
-            List<Score> scores = GetScores();
-            scores.Add(score);
-
-            SerializeScoreToFile(scores, fileName);
-        }
-
+        
 
         public static void DisplayScore()
         {
-            var scores = GetScores();
+            var scores = ReadScores();
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(Environment.NewLine);
             Console.WriteLine("╔═╗┌─┐┌─┐┬─┐┌─┐");
