@@ -13,7 +13,9 @@ This game allows to play manually by entering the coordinance of the shots or au
 6. Play Battleship
   
   A. Choose 1 to play and pick a playing mode
+  
      1. Auto - Play automatically the whole game shooting randomly
+     
      2. Manual - Play manualy the whole game picking the shooting coordinances
      
   B. Choose 2 to show current scores
