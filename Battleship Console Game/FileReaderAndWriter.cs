@@ -26,8 +26,17 @@ namespace BattleshipConsoleGame
             
             SerializeScoreToFile(battle.Scores, fileName);
         }
-        
 
+        public static void ResetScore()
+        {
+            var emptyScore = new List<Score>();
+
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo directoryInfo = new DirectoryInfo(currentDirectory);
+            var fileName = Path.Combine(directoryInfo.FullName, "battleshipScore.json");
+
+            SerializeScoreToFile(emptyScore, fileName);
+        }
         public static void DisplayScore()
         {
             var scores = ReadScores();
@@ -83,6 +92,7 @@ namespace BattleshipConsoleGame
                 serializer.Serialize(jsonWriter, scores);
             }
         }
+
        
     }
 }
